@@ -1,26 +1,46 @@
-function scanIP() {
-  let ip = document.getElementById("ipInput").value;
+let watchId = null;
 
-  let url = ip
-    ? `https://ipapi.co/${ip}/json/`
-    : "https://ipapi.co/json/";
+function startTracking() {
+  if (!navigator.geolocation) {
+    status("Geolocation not supported");
+    return;
+  }
 
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("ip").innerText = data.ip;
-      document.getElementById("country").innerText = data.country_name;
-      document.getElementById("isp").innerText = data.org;
-      document.getElementById("asn").innerText = data.asn;
+  status("Searching satellites...");
 
-      let vpn = data.proxy ? "YES ⚠️" : "NO";
-      document.getElementById("vpn").innerText = vpn;
+  watchId = navigator.geolocation.watchPosition(
+    pos => {
+      const { latitude, longitude, accuracy } = pos.coords;
 
-      let score = data.proxy ? 85 : 15;
-      document.getElementById("score").innerText = score + "/100";
+      document.getElementById("lat").innerText = latitude;
+      document.getElementById("lon").innerText = longitude;
+      document.getElementById("acc").innerText = accuracy.toFixed(1);
 
-      document.getElementById("status").innerText =
-        score > 50 ? "HIGH RISK 🔴" : "LOW RISK 🟢";
-    })
-    .catch(() => alert("Scan failed"));
+      if (accuracy <= 10) {
+        status("High accuracy lock ✅");
+      } else {
+        status("Improving accuracy...");
+      }
+    },
+    err => {
+      status("Permission denied or error");
+    },
+    {
+      enableHighAccuracy: true,
+      maximumAge: 0,
+      timeout: 15000
+    }
+  );
+}
+
+function stopTracking() {
+  if (watchId !== null) {
+    navigator.geolocation.clearWatch(watchId);
+    watchId = null;
+    status("Tracking stopped");
+  }
+}
+
+function status(msg) {
+  document.getElementById("status").innerText = msg;
 }
