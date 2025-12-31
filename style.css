@@ -1,0 +1,44 @@
+body {
+  background: #070b10;
+  color: #00eaff;
+  font-family: monospace;
+}
+
+.wrapper {
+  max-width: 420px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #101820;
+  color: #00eaff;
+  border: 1px solid #00eaff55;
+  border-radius: 6px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.panel {
+  margin-top: 20px;
+  background: #0e141b;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #00eaff20;
+}
+
+footer {
+  text-align: center;
+  margin-top: 15px;
+  color: #555;
+  font-size: 12px;
+}
