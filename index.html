@@ -1,31 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SOC Threat Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exact GPS Location</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="wrapper">
-    <h1>🛡 SOC Threat Monitoring</h1>
 
-    <input id="ipInput" placeholder="Enter IP or leave blank" />
-    <button onclick="scanIP()">Analyze</button>
+<div class="box">
+  <h2>📍 Exact GPS Location</h2>
+  <button onclick="getLocation()">Get My Location</button>
 
-    <div class="panel">
-      <p>IP: <span id="ip"></span></p>
-      <p>Country: <span id="country"></span></p>
-      <p>ISP: <span id="isp"></span></p>
-      <p>ASN: <span id="asn"></span></p>
-      <p>VPN / Proxy: <span id="vpn"></span></p>
-      <p>Threat Score: <span id="score"></span></p>
-      <p>Status: <span id="status"></span></p>
-    </div>
+  <p>Latitude: <span id="lat">--</span></p>
+  <p>Longitude: <span id="lon">--</span></p>
+  <p>Accuracy: <span id="acc">--</span> meters</p>
 
-    <footer>SOC Simulation · Educational</footer>
-  </div>
+  <p id="status"></p>
+</div>
 
-  <script src="soc.js"></script>
+<script src="gps.js"></script>
 </body>
-  </html>
+</html>
